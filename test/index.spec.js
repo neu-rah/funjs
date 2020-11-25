@@ -35,35 +35,23 @@ foldable(Array().__proto__)
 
 ///////////////////////////////////////////
 // test stuff
-const e=x=>x/2
-const f=x=>x+2
-const g=x=>x*10
-
-function testFunc(f,name,test,error) {
-  assert(typeof f==="function","function `"+name+"` not found")
-  assert(test,"function `"+name+"` error "+(error||""))
-}
-
 describe("Functional",function() {
   it("utility functions",async ()=>{
-    testFunc(id,"id",id(0)===0&&id("ok")==="ok","not reflecting")
-    testFunc(fcomp,fcomp(f)(g)(4)===42,"fcomp")
-    testFunc(fchain,"fchain",fchain(e,f,g)(4)===21)
-    testFunc(constant,"constant",constant(0)(1)===0)
-    testFunc(flip,"flip",flip(a=>b=>a/b)(1)(2)===2)
-    testFunc(cons,"cons",cons(1,[]).length===1)
+    const e=x=>x/2
+    const f=x=>x+2
+    const g=x=>x*10
+    assert(id(0)===0&&id("ok")==="ok","not reflecting")
+    assert(fcomp(f)(g)(4)===42,"fcomp")
+    assert(fchain(e,f,g)(4)===21)
+    assert(constant(0)(1)===0)
+    assert(flip(a=>b=>a/b)(1)(2)===2)
+    assert(cons(1,[]).length===1)
     assert.deepStrictEqual(cons(2)(cons(1,[])), [2,1])
   })
 })
 
 describe("Semigroup/Monoid",function() {
   it("Semigroup and monoid functions",async ()=>{
-    testFunc(empty,"empty",true)
-    testFunc(append,"append",true)
-    testFunc(mconcat,"mconcat",true)
-    testFunc(monoidFunction,"monoidFunction",true)
-    testFunc(monoidString,"monoidString",true)
-    testFunc(monoidArray,"monoidArray",true)
     assert(typeof Function().__proto__.append==="function","primitive function type not Semigroup patched")
     assert(typeof Function().__proto__.empty==="function","primitive function type not Monoid patched")
     assert(typeof String().__proto__.append==="function","primitive String type not Semigroup patched")
@@ -75,9 +63,9 @@ describe("Semigroup/Monoid",function() {
 
 describe("List",function() {
   it("primitives (Array, String) as lists",async ()=>{
-    testFunc(head,"head",head("oks")==="o","head of string")
-    testFunc(tail,"tail",tail("oks")==="ks","tail of string")
-    testFunc(head,"head",head([1,2,3])===1,"head of Array")
+    assert(head("oks")==="o","head of string")
+    assert(tail("oks")==="ks","tail of string")
+    assert(head([1,2,3])===1,"head of Array")
     assert.deepStrictEqual(tail([1,2,3]),[2,3],"Array `tail` error")
   })
 })
