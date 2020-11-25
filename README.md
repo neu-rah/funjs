@@ -31,9 +31,9 @@ This package aims to help with my parser combinator stuff (just)
   //foldable  
   foldable,foldr,foldl,foldr1,foldl1,foldMap,
 
-##`require` example
+## `require` example
 
-```node
+```javascript
 const {
   //Functional
   id,fcomp,fchain,constant,flip,cons,
