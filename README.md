@@ -10,14 +10,15 @@ const {
   patchPrimitives,//patch primitive data types
   id,fcomp,fchain,constant,flip,cons,//Functional
   empty,append,mconcat,//Monoid
-  map,drop,//Functor
-  pure,mbind,//Monad
-  foldable,foldr,foldl,foldr1,foldl1,foldMap,//Foldable
   head,tail,//List
+  map,drop,//Functor
+  pure,app,//Applicative
+  /*pure,*/mbind,//Monad
   Pair,fst,snd,//Pair (tupple)
   Maybe,isMaybe,Nothing,isNothing,Just,isJust,fromJust,//Maybe
   isEither,Left,isLeft,fromLeft,Right,isRight,fromRight,//Either
-} = require("<path>/funjs.git");
+  foldable,foldr,foldl,foldr1,foldl1,foldMap,//foldable
+} = require("../funjs.js");
 
 patchPrimitives(
   Function().__proto__,

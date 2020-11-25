@@ -8,7 +8,7 @@ monoidArray(Array().__proto__)
 class T_Either {
   pure(o) {return Right(o)}//Monad instance
   when(o) {return isLeft(o)?o:this}//applicative instance this <* o | this << o
-  then(o) {return this.when(o)}//applicative instance this *> o | this >> o
+  then(o) {return o.when(this)}//applicative instance this *> o | this >> o
 };
 
 const isEither=o=>T_Either.prototype.isPrototypeOf(o);
@@ -24,6 +24,7 @@ class TC_Left extends T_Either {
   mbind(_){return this}//monad instance
   append(o){return o}//semigroup instance
   or(o){return o}//alternative instance
+  app(o) {return isRight(o)?this.value(o):o}// (<*>) :: f (a -> b) -> f a -> f b
 };
 
 const Left=o=>new TC_Left(o);

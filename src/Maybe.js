@@ -1,7 +1,7 @@
 "use strict";
 
 class T_Maybe {
-  // pure(o) {return Just(o)}
+  pure(o) {return Just(o)}
 };
 
 const Maybe=new T_Maybe()
@@ -14,6 +14,9 @@ class TC_Nothing extends T_Maybe {
   append(mo) {return mo}
   when(_) {return this}//applicative instance this <* o | this << o
   then(_) {return this}//applicative instance this *> o | this >> o
+  app(o) {return this}// (<*>) :: f (a -> b) -> f a -> f b
+  //mbind::m a->(a->m b)-> m b
+  mbind(_){return this}//monad instance
 };
 
 const Nothing=()=>new TC_Nothing();
@@ -28,6 +31,9 @@ class TC_Just extends T_Maybe {
   append(mo) {return isJust(mo)?this.pure(this.value.append(fromJust(mo))):this.empty()}
   when(o) {return isNothing(o)?o:this}//applicative instance this <* o | this << o
   then(o) {return o.when(this)}//applicative instance this *> o | this >> o
+  app(o) {return this.value(o)}// (<*>) :: f (a -> b) -> f a -> f b
+  //mbind::m a->(a->m b)-> m b
+  mbind(f){return f(this.value)}//monad instance
 };
 
 const Just=o=>new TC_Just(o);

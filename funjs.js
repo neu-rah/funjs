@@ -22,8 +22,11 @@ listArray(Array().__proto__)
 const functor=require("./src/Functor")
 const {map,drop}=functor
 
+const applicative=require("./src/Applicative")
+const {pure,app}=applicative
+
 const monad=require("./src/Monad")
-const {pure,mbind}=monad
+const {/*pure,*/mbind}=monad
 
 const pair=require("./src/Pair")
 const {Pair,fst,snd}=pair
@@ -67,3 +70,4 @@ pub(maybe)
 pub(either)
 pub(fold)
 pub(monad)
+pub(app)

@@ -1,26 +1,17 @@
 const assert = require("assert");
 
 const {
-  //patch primitive data types
-  patchPrimitives,
-  //Functional
-  id,fcomp,fchain,constant,flip,cons,
-  //Monoid
-  empty,append,mconcat,monoidFunction,monoidString,monoidArray,
-  //List
-  head,tail,listString,listArray,
-  //Functor
-  map,drop,
-  //Monad
-  pure,mbind,
-  //Pair (tupple)
-  Pair,fst,snd,mbind,
-  //Maybe
-  Maybe,isMaybe,Nothing,isNothing,Just,isJust,fromJust,
-  //Either
-  isEither,Left,isLeft,fromLeft,Right,isRight,fromRight,
-  //foldable
-  foldable,foldr,foldl,foldr1,foldl1,foldMap,
+  patchPrimitives,//patch primitive data types
+  id,fcomp,fchain,constant,flip,cons,//Functional
+  empty,append,mconcat,//Monoid
+  head,tail,//List
+  map,drop,//Functor
+  pure,app,//Applicative
+  /*pure,*/mbind,//Monad
+  Pair,fst,snd,//Pair (tupple)
+  Maybe,isMaybe,Nothing,isNothing,Just,isJust,fromJust,//Maybe
+  isEither,Left,isLeft,fromLeft,Right,isRight,fromRight,//Either
+  foldable,foldr,foldl,foldr1,foldl1,foldMap,//foldable
 } = require("../funjs.js");
 
 patchPrimitives(
@@ -28,20 +19,6 @@ patchPrimitives(
   String().__proto__,
   Array().__proto__,
 )
-
-// //patch primitive data types for Monoid (and Semigroup)
-// monoidFunction(Function().__proto__)
-// monoidString(String().__proto__)
-// monoidArray(Array().__proto__)
-
-// //patch primitive data types for List
-// listString(String().__proto__)
-// listArray(Array().__proto__)
-
-// //patch primitive data types for Foldable
-// foldable(String().__proto__)
-// foldable(Array().__proto__)
-
 
 ///////////////////////////////////////////
 // test stuff
@@ -86,6 +63,30 @@ describe("Functor",function() {
     assert.deepStrictEqual(map(o=>o+1)([1,2,3]),[2,3,4],"map over Array")    
     assert.strictEqual(drop(2)("rui"),"i","String drop")
     assert.deepStrictEqual(drop(2)([1,2,3]),[3],"Array drop")    
+  })
+})
+
+describe("Applicative",function() {
+  it("Applicative pure/app",async ()=>{
+    assert.deepStrictEqual( [id,id].app([1,2,3]), [1,2],"list applicative")
+  })
+})
+
+describe("Monad",function() {
+  it("Just monad",async ()=>{
+    assert.deepStrictEqual( Just(1).when(Just(2)), Just(1),"Just monad << / <* ok")
+    assert.deepStrictEqual( Just(1).when(Nothing()), Nothing(),"Just monad << / <* fail")
+    assert.deepStrictEqual( Just(1).then(Just(2)), Just(2),"Just monad >> / *> ok")
+    assert.deepStrictEqual( Nothing().then(Just(1)), Nothing(),"Just monad >> / *> fail")
+    // assert.deepStrictEqual( Nothing.or(Just(1)(), Just(1),"Just alternative <|>")
+    assert.deepStrictEqual( Just(1).mbind(x=>Just(x*10)), Just(10),"Just monad >>= (bind)")
+  })
+  it("Either monad",async ()=>{
+    assert.deepStrictEqual( Right(1).when(Right(2)), Right(1),"Either monad << / <* ok")
+    assert.deepStrictEqual( Right(1).when(Left(0)), Left(0),"Either monad << / <* fail")
+    assert.deepStrictEqual( Right(1).then(Right(2)), Right(2),"Either monad >> / *> ok")
+    assert.deepStrictEqual( Left(0).then(Right(1)), Left(0),"Either monad >> / *> fail")
+    assert.deepStrictEqual( Right(1).mbind(x=>Right(x*10)), Right(10),"Either monad >>= (bind)")
   })
 })
 
