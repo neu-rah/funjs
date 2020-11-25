@@ -1,0 +1,34 @@
+{
+  "name": "funjs",
+  "version": "1.0.0",
+  "description": "functional javascript",
+  "main": "funjs.js",
+  "scripts": {
+    "test": "mocha test/index.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neu-rah/funjs.git"
+  },
+  "keywords": [
+    "functional",
+    "javascript",
+    "js",
+    "Semigroup",
+    "Monoid",
+    "Functor",
+    "Applicative",
+    "Traversable",
+    "Monad",
+    "Maybe",
+    "Either",
+    "Lazy",
+    "Strict"
+  ],
+  "author": "neu-rah",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neu-rah/funjs/issues"
+  },
+  "homepage": "https://github.com/neu-rah/funjs#readme"
+}
