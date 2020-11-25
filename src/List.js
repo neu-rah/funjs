@@ -11,7 +11,7 @@ exports.listArray=o=>{
   o.head=function() {return this[0]}
   o.tail=function() {return this.slice(1)}
   o.mconcat=function(){
-    if(this.length==0) return
+    if(this.length==0) return []
     return this.length==1?this.head():this.head().append(this.tail().mconcat())
   }
   o.pure=o=>[o]
