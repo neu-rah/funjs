@@ -36,6 +36,22 @@ const {foldable,foldr,foldl,foldr1,foldl1,foldMap}=fold
 foldable(String().__proto__)
 foldable(Array().__proto__)
 
+exports.patchPrimitives=function(f,s,a) {
+  //patch primitive data types for Monoid (and Semigroup)
+  monoidFunction(f)
+  monoidString(s)
+  monoidArray(a)
+
+  //patch primitive data types for List
+  listString(s)
+  listArray(a)
+
+  //patch primitive data types for Foldable
+  foldable(s)
+  foldable(a)
+}
+
+
 //republish imported modules
 const pub=o=>Object.keys(o).forEach(k=>exports[k]=o[k])
 

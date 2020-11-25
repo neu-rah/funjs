@@ -1,6 +1,8 @@
 const assert = require("assert");
 
 const {
+  //patch primitive data types
+  patchPrimitives,
   //Functional
   id,fcomp,fchain,constant,flip,cons,
   //Monoid
@@ -19,18 +21,24 @@ const {
   foldable,foldr,foldl,foldr1,foldl1,foldMap,
 } = require("../funjs.js");
 
-//patch primitive data types for Monoid (and Semigroup)
-monoidFunction(Function().__proto__)
-monoidString(String().__proto__)
-monoidArray(Array().__proto__)
+patchPrimitives(
+  Function().__proto__,
+  String().__proto__,
+  Array().__proto__,
+)
 
-//patch primitive data types for List
-listString(String().__proto__)
-listArray(Array().__proto__)
+// //patch primitive data types for Monoid (and Semigroup)
+// monoidFunction(Function().__proto__)
+// monoidString(String().__proto__)
+// monoidArray(Array().__proto__)
 
-//patch primitive data types for Foldable
-foldable(String().__proto__)
-foldable(Array().__proto__)
+// //patch primitive data types for List
+// listString(String().__proto__)
+// listArray(Array().__proto__)
+
+// //patch primitive data types for Foldable
+// foldable(String().__proto__)
+// foldable(Array().__proto__)
 
 
 ///////////////////////////////////////////
