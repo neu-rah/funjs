@@ -22,8 +22,11 @@ listArray(Array().__proto__)
 const functor=require("./src/Functor")
 const {map,drop}=functor
 
+const monad=require("./src/Monad")
+const {pure,mbind}=monad
+
 const pair=require("./src/Pair")
-const {Pair,fst,snd,mbind}=pair
+const {Pair,fst,snd}=pair
 
 const maybe=require("./src/Maybe")
 const {Maybe,isMaybe,Nothing,isNothing,Just,isJust,fromJust}=maybe
@@ -63,3 +66,4 @@ pub(pair)
 pub(maybe)
 pub(either)
 pub(fold)
+pub(monad)

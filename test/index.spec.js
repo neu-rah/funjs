@@ -11,6 +11,8 @@ const {
   head,tail,listString,listArray,
   //Functor
   map,drop,
+  //Monad
+  pure,mbind,
   //Pair (tupple)
   Pair,fst,snd,mbind,
   //Maybe

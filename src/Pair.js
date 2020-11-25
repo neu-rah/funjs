@@ -32,4 +32,4 @@ const Pair=(a,b)=>typeof b==="undefined"?c=>new TC_Pair(a,c):new TC_Pair(a,b)
 exports.Pair=Pair
 exports.fst=o=>o.fst()
 exports.snd=o=>o.snd()
-exports.mbind=o=>o.mbind
+// exports.mbind=o=>o.mbind

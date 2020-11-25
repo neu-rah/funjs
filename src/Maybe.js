@@ -12,6 +12,8 @@ class TC_Nothing extends T_Maybe {
   constructor() {return super();}
   map(_) {return this}
   append(mo) {return mo}
+  when(_) {return this}//applicative instance this <* o | this << o
+  then(_) {return this}//applicative instance this *> o | this >> o
 };
 
 const Nothing=()=>new TC_Nothing();
@@ -24,6 +26,8 @@ class TC_Just extends T_Maybe {
   }
   map(f) {return Just(f(this.value))}
   append(mo) {return isJust(mo)?this.pure(this.value.append(fromJust(mo))):this.empty()}
+  when(o) {return isNothing(o)?o:this}//applicative instance this <* o | this << o
+  then(o) {return o.when(this)}//applicative instance this *> o | this >> o
 };
 
 const Just=o=>new TC_Just(o);
