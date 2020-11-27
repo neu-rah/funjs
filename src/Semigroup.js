@@ -6,7 +6,7 @@ exports.semigroupFunction=o=>{
   o.append=function(p) {return fcomp(this,p)}
 }
 
-exports.semigroupString=o=>{
+exports.semigroupString=function(o) {
   o.append=function(p) {return this+p}
 }
 

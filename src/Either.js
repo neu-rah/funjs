@@ -9,6 +9,7 @@ class T_Either {
   pure(o) {return Right(o)}//Monad instance
   when(o) {return isLeft(o)?o:this}//applicative instance this <* o | this << o
   then(o) {return this.when(this)}//applicative instance this *> o | this >> o
+  isEither() {return true}
 };
 
 const isEither=o=>T_Either.prototype.isPrototypeOf(o);
@@ -25,6 +26,8 @@ class TC_Left extends T_Either {
   append(o){return o}//semigroup instance
   or(o){return o}//alternative instance
   app(o) {return isRight(o)?this.value(o):o}// (<*>) :: f (a -> b) -> f a -> f b
+  isLeft() {return true}
+  isRight() {return false}
 };
 
 const Left=o=>new TC_Left(o);
@@ -40,6 +43,8 @@ class TC_Right extends T_Either {
   mbind(f){return f(this.value)}//monad instance
   append(o){return isLeft(o)?o:this.pure(this.value.append(o))}//semigroup instance
   or(_){return this}//alternative instance
+  isLeft() {return true}
+  isRight() {return false}
 };
 
 const Right=o=>new TC_Right(o);
