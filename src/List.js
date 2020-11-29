@@ -10,6 +10,8 @@ monoidArray(Array().__proto__)
 exports.listArray=o=>{
   o.head=function() {return this[0]}
   o.tail=function() {return this.slice(1)}
+  o.last=function() {return this.slice(-1)[0]}
+  o.init=function() {return this.slice(0,-1)}
   o.mconcat=function(){
     if(this.length==0) return []
     return this.length==1?this.head():this.head().append(this.tail().mconcat())
@@ -23,6 +25,8 @@ exports.listArray=o=>{
 exports.listString=o=>{
   o.head=function() {return this[0]}
   o.tail=function() {return this.substr(1)}
+  o.last=function() {return this[this.length-1]}
+  o.init=function() {return this.substr(0,this.length-1)}
   o.pure=""
 }
 
@@ -31,5 +35,7 @@ exports.listArray(Array().__proto__)
 
 exports.head=o=>o.head()
 exports.tail=o=>o.tail()
+exports.init=o=>o.init()
+exports.last=o=>o.last()
 exports.mconcat=o=>o.mconcat()
 
