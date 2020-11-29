@@ -1,5 +1,6 @@
 "use strict";
 
+const {curry}=require("./curry")
 const {fcomp}=require("./Functional")
 
 exports.semigroupFunction=o=>{
@@ -18,5 +19,5 @@ exports.semigroupFunction(Function().__proto__)
 exports.semigroupString(String().__proto__)
 exports.semigroupArray(Array().__proto__)
 
-exports.append=a=>b=>a.append(b)
+exports.append=curry((a,b)=>a.append(b))
 

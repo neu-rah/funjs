@@ -17,7 +17,7 @@ exports.listArray=o=>{
     return this.length==1?this.head():this.head().append(this.tail().mconcat())
   }
   o.pure=o=>[o]
-  o.app=function(p) {
+  o.app=function(p) {//applicative instance
     return (this.length&&p.length)?cons(this.head()(p.head()),this.tail().app(p.tail())):this.empty
   }
 }

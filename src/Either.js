@@ -8,7 +8,7 @@ monoidArray(Array().__proto__)
 class T_Either {
   pure(o) {return Right(o)}//Monad instance
   when(o) {return isLeft(o)?o:this}//applicative instance this <* o | this << o
-  then(o) {return this.when(this)}//applicative instance this *> o | this >> o
+  then(o) {return o.when(this)}//applicative instance this *> o | this >> o
   isEither() {return true}
 };
 
