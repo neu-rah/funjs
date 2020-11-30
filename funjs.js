@@ -1,4 +1,7 @@
 "use strict";
+
+const {curry}=require("./curry")
+
 //should be available throwgh Monoid also
 // const {append,semigroupFunction,semigroupString,semigroupArray}=require("./src/Semigroup")
 // semigroupFunction(Function().__proto__)
@@ -71,3 +74,5 @@ pub(either)
 pub(fold)
 pub(monad)
 pub(app)
+
+exports.curry=curry
