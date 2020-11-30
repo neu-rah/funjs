@@ -21,12 +21,12 @@ monoidString(String().__proto__)
 monoidArray(Array().__proto__)
 
 const list=require("./src/List")
-const {head,tail,listString,listArray}=list
+const {head,tail,listString,listArray,take,drop}=list
 listString(String().__proto__)
 listArray(Array().__proto__)
 
 const functor=require("./src/Functor")
-const {map,drop}=functor
+const {map}=functor
 
 const applicative=require("./src/Applicative")
 const {pure,app}=applicative
