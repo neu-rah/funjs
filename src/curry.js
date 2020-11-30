@@ -1,3 +1,5 @@
+"use strict";
+
 //based from https://javascript.info/currying-partials
 const curry=f=>function curried(...a) {
   return a.length >= f.length?

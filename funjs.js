@@ -11,6 +11,9 @@ const {curry}=require("./src/curry")
 const func=require("./src/Functional")
 const {id,fcomp,fchain,constant,flip,cons}=func
 
+const numeral=require("./src/Peano.js")
+const {peano,succ}=numeral
+
 const monoid=require("./src/Monoid")
 const {empty,append,mconcat,monoidFunction,monoidString,monoidArray}=monoid
 monoidFunction(Function().__proto__)
@@ -65,6 +68,7 @@ exports.patchPrimitives=function(f,s,a) {
 const pub=o=>Object.keys(o).forEach(k=>exports[k]=o[k])
 
 pub(func)
+pub(numeral)
 pub(monoid)
 pub(list)
 pub(functor)

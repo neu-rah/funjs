@@ -9,6 +9,7 @@ This package aims to help with my parser combinator stuff (just)
 const {
   patchPrimitives,//patch primitive data types
   id,fcomp,fchain,constant,flip,cons,//Functional
+  peano,succ,
   empty,append,mconcat,//Monoid
   head,tail,//List
   map,drop,//Functor
