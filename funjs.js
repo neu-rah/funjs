@@ -1,6 +1,6 @@
 "use strict";
 
-const {curry}=require("./curry")
+const {curry}=require("./src/curry")
 
 //should be available throwgh Monoid also
 // const {append,semigroupFunction,semigroupString,semigroupArray}=require("./src/Semigroup")
