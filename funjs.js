@@ -48,6 +48,8 @@ const {foldable,foldr,foldl,foldr1,foldl1,foldMap}=fold
 foldable(String().__proto__)
 foldable(Array().__proto__)
 
+if(!exports) var exports={}
+
 exports.patchPrimitives=function(f,s,a) {
   //patch primitive data types for Monoid (and Semigroup)
   monoidFunction(f)
