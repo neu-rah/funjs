@@ -20,8 +20,8 @@ const TC_Pair=class Pair {
   }
   fst() {return this.a}
   snd() {return this.b}
-  map(f) {return new Pair(this.fst())(f(this.snd()))}
-  append(o) {return new Pair(this.fst())(this.snd().append(o))}
+  map(f) {return new Pair(this.fst(),f(this.snd()))}
+  append(o) {return new Pair(this.fst(),this.snd().append(o))}
   swap() {return new Pair(this.snd(),this.fst())}
   mbind(f) {return f(this)}
 }
