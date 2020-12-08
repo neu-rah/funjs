@@ -15,9 +15,7 @@ exports.listArray=o=>{
   o.last=function() {return this.slice(-1)[0]}
   o.init=function() {return this.slice(0,-1)}
   o.mconcat=function(){
-    //this would go better on typescript i guess (uh?), can we parametrize on return type?
-    //anyway i prefer the error istead of `undefined`
-    if(this.length==0) throw new Error("<funjs> mconcat of empty list")
+    if(this.length==0) [] //throw new Error("<funjs> mconcat of empty list")
     return this.length==1?this.head():this.head().append(this.tail().mconcat())
   }
   o.pure=o=>[o]
