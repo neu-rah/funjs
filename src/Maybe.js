@@ -27,7 +27,7 @@ const TC_Just=class Just extends T_Maybe {
     super()
     this.value=o
   }
-  map(f) {return Just(f(this.value))}
+  map(f) {return new Just(f(this.value))}
   append(mo) {return isJust(mo)?this.pure(this.value.append(fromJust(mo))):this.empty()}
   when(o) {return isNothing(o)?o:this}//applicative instance this <* o | this << o
   then(o) {return o.when(this)}//applicative instance this *> o | this >> o
