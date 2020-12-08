@@ -15,13 +15,14 @@ const numeral=require("./src/Peano.js")
 const {peano,succ}=numeral
 
 const monoid=require("./src/Monoid")
-const {empty,append,mconcat,monoidFunction,monoidString,monoidArray}=monoid
+const {empty,append,monoidFunction,monoidString,monoidArray,monoidObject}=monoid
 monoidFunction(Function().__proto__)
 monoidString(String().__proto__)
 monoidArray(Array().__proto__)
+monoidObject(Object().__proto__)
 
 const list=require("./src/List")
-const {head,tail,listString,listArray,take,drop}=list
+const {head,tail,mconcat,listString,listArray,take,drop}=list
 listString(String().__proto__)
 listArray(Array().__proto__)
 
@@ -50,11 +51,12 @@ foldable(Array().__proto__)
 
 if(!exports) var exports={}
 
-exports.patchPrimitives=function(f,s,a) {
+exports.patchPrimitives=function(f,s,a,o) {
   //patch primitive data types for Monoid (and Semigroup)
   monoidFunction(f)
   monoidString(s)
   monoidArray(a)
+  monoidObject(a)
 
   //patch primitive data types for List
   listString(s)
@@ -64,7 +66,6 @@ exports.patchPrimitives=function(f,s,a) {
   foldable(s)
   foldable(a)
 }
-
 
 //republish imported modules
 const pub=o=>Object.keys(o).forEach(k=>exports[k]=o[k])

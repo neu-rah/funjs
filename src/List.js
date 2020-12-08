@@ -3,7 +3,7 @@
 const {curry}=require("./curry")
 const {cons}=require("./Functional.js")
 const {peano}=require("./Peano.js")
-const {monoidString,monoidArray,empty,append,mconcat}=require("./Monoid.js")
+const {monoidString,monoidArray,empty,append}=require("./Monoid.js")
 //because Lists are Monoids
 //patch primitive data types
 monoidString(String().__proto__)
@@ -15,7 +15,9 @@ exports.listArray=o=>{
   o.last=function() {return this.slice(-1)[0]}
   o.init=function() {return this.slice(0,-1)}
   o.mconcat=function(){
-    if(this.length==0) return []
+    //this would go better on typescript i guess (uh?), can we parametrize on return type?
+    //anyway i prefer the error istead of `undefined`
+    if(this.length==0) throw new Error("<funjs> mconcat of empty list")
     return this.length==1?this.head():this.head().append(this.tail().mconcat())
   }
   o.pure=o=>[o]

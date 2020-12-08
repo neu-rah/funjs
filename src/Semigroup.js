@@ -15,9 +15,14 @@ exports.semigroupArray=o=>{
   o.append=function(p) {return this.concat(p)}
 }
 
+exports.semigroupObject=o=>{
+  o.append=function(p) {return Object.assign(Object.assign({},this),p)}
+}
+
 exports.semigroupFunction(Function().__proto__)
 exports.semigroupString(String().__proto__)
 exports.semigroupArray(Array().__proto__)
+exports.semigroupObject(Object().__proto__)
 
 exports.append=curry((a,b)=>a.append(b))
 
