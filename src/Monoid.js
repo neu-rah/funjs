@@ -40,6 +40,7 @@ exports.monoidObject=o=>{
 exports.monoidFunction(Function().__proto__)
 exports.monoidString(String().__proto__)
 exports.monoidArray(Array().__proto__)
+exports.monoidObject(Object().__proto__)
 
 exports.empty=o=>o.empty
 exports.append=o=>o.append

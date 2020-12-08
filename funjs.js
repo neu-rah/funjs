@@ -56,7 +56,7 @@ exports.patchPrimitives=function(f,s,a,o) {
   monoidFunction(f)
   monoidString(s)
   monoidArray(a)
-  monoidObject(a)
+  monoidObject(o)
 
   //patch primitive data types for List
   listString(s)
