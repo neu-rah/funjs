@@ -5,7 +5,7 @@ const {monoidString,monoidArray,empty}=require("./Monoid.js")
 monoidString(String().__proto__)
 monoidArray(Array().__proto__)
 
-class T_Either {
+const T_Either=class Either {
   pure(o) {return Right(o)}//Monad instance
   when(o) {return isLeft(o)?o:this}//applicative instance this <* o | this << o
   then(o) {return o.when(this)}//applicative instance this *> o | this >> o
@@ -14,7 +14,7 @@ class T_Either {
 
 const isEither=o=>T_Either.prototype.isPrototypeOf(o);
 
-class TC_Left extends T_Either {
+const TC_Left=class Left extends T_Either {
   constructor(o) {
     super();
     this.value=o;
@@ -33,7 +33,7 @@ class TC_Left extends T_Either {
 const Left=o=>new TC_Left(o);
 const isLeft=o=>TC_Left.prototype.isPrototypeOf(o)
 
-class TC_Right extends T_Either {
+const TC_Right=class Right extends T_Either {
   constructor(o) {
     super();
     this.value=o;

@@ -1,6 +1,6 @@
 "use strict";
 
-class T_Maybe {
+const T_Maybe=class Maybe {
   pure(o) {return Just(o)}
 };
 
@@ -8,7 +8,7 @@ const Maybe=new T_Maybe()
 
 const isMaybe=o=>T_Maybe.prototype.isPrototypeOf(o);
 
-class TC_Nothing extends T_Maybe {
+const TC_Nothing=class Nothing extends T_Maybe {
   constructor() {return super();}
   map(_) {return this}
   append(mo) {return mo}
@@ -22,7 +22,7 @@ class TC_Nothing extends T_Maybe {
 const Nothing=()=>new TC_Nothing();
 const isNothing=o=>TC_Nothing.prototype.isPrototypeOf(o);
 
-class TC_Just extends T_Maybe {
+const TC_Just=class Just extends T_Maybe {
   constructor(o) {
     super()
     this.value=o
