@@ -11,7 +11,7 @@ const {foldr,foldl,foldMap, foldable}=require("./Foldable")
 foldable(Array().__proto__)
 foldable(String().__proto__)
 
-class TC_Pair {
+const TC_Pair=class Pair {
   constructor(a,b) {
     this.a=a
     this.b=b
@@ -20,9 +20,9 @@ class TC_Pair {
   }
   fst() {return this.a}
   snd() {return this.b}
-  map(f) {return Pair(this.fst())(f(this.snd()))}
-  append(o) {return Pair(this.fst())(this.snd().append(o))}
-  swap() {return Pair(this.snd(),this.fst())}
+  map(f) {return new Pair(this.fst())(f(this.snd()))}
+  append(o) {return new Pair(this.fst())(this.snd().append(o))}
+  swap() {return new Pair(this.snd(),this.fst())}
   mbind(f) {return f(this)}
 }
 
