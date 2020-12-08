@@ -2,6 +2,7 @@
 
 //patch primitive data types
 const {monoidString,monoidArray,empty}=require("./Monoid.js")
+// const {SelfExtractClass}=require("./selfExtract")//not sure if this helps, class is working nice
 monoidString(String().__proto__)
 monoidArray(Array().__proto__)
 
