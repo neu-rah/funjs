@@ -25,10 +25,12 @@ exports.listArray=o=>{
   o.drop=function(n) {return peano(n)(i=>i.tail())(this)}
   o.take=function(n) {return n?cons(this.head())(this.tail().take(n-1)):[]}
   o.elem=function(e) {return this.indexOf(e)!==-1}
-  o.unique=()=>{
-    const u=o=>oo=>oo.elem(o)?unique(oo):cons(o,unique(oo))
-    return o.length?u(head(o))(tailoo):[]
+  o.unique=function(){
+    console.log("unique",this)
+    const u=o=>oo=>oo.elem(o)?oo.unique():cons(o,oo.unique())
+    return this.length?u(this.head())(this.tail()):[]
   }
+  o.isEmpty=function() {return !this.length}
 }
 
 exports.listString=o=>{
@@ -40,10 +42,12 @@ exports.listString=o=>{
   o.take=function(n) {return this.substr(0,n)}
   o.elem=function(e) {return this.indexOf(e)!==-1}
   o.pure=o=>o.toString()
-  o.unique=()=>{
-    const u=o=>oo=>oo.elem(o)?unique(oo):cons(o,unique(oo))
-    return o.length?u(head(o))(tailoo):[]
+  o.unique=function() {
+    const u=o=>oo=>oo.elem(o)?oo.unique():cons(o,oo.unique())
+    return this.length?u(this.head())(this.tail()):""
   }
+  o.filter=function(f) {return this.split("").filter(f).join("")}
+  o.isEmpty=function() {return !this.length}
 }
 
 exports.listString(String().__proto__)
@@ -58,4 +62,6 @@ exports.drop=curry((n,o)=>o.drop(n))
 exports.take=curry((n,o)=>o.take(n))
 exports.mconcat=o=>o.mconcat()
 exports.unique=o=>o.unique()
+exports.filter=curry((o,f)=>o.filter(f))
+exports.isEmpty=o=>o.isEmpty()
 

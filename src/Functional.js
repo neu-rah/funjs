@@ -10,6 +10,12 @@ const arrayCons=curry((o,oo)=>(oo.unshift(o),oo))
 const stringCons=curry((o,oo)=>o+oo)
 const cons=curry((o,oo)=>oo.unshift?arrayCons(o,oo):stringCons(o,oo))
 exports.cons=curry((o,oo)=>typeof oo==="undefined"?oos=>cons(o,oos):cons(o,oo))
+exports.zip=curry(
+  (o,p)=>o.length&&p.length? cons(Pair(head(o),head(p)),zip(tail(o),tail(p))):[]
+)
+exports.zipWith=curry(
+  (f,o,p)=>o.length&&p.length? cons(f(head(o))(head(p)),zipWith(f,tail(o),tail(p))):[]
+)
 
 //function composition in js style (multiple arguments)
 function fc(fs) {

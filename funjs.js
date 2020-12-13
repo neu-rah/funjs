@@ -20,6 +20,7 @@ using(
   "./src/Maybe",
   "./src/Either",
   "./src/Foldable",
+  "./src/MonadPlus"
 )
 
 monoidFunction(Function().__proto__)

@@ -17,6 +17,7 @@ const TC_Nothing=class Nothing extends T_Maybe {
   app(o) {return this}// (<*>) :: f (a -> b) -> f a -> f b
   //mbind::m a->(a->m b)-> m b
   mbind(_){return this}//monad instance
+  mplus(o) {return o}//monadplus instance
 };
 
 const Nothing=()=>new TC_Nothing();
@@ -34,6 +35,7 @@ const TC_Just=class Just extends T_Maybe {
   app(o) {return this.value(o)}// (<*>) :: f (a -> b) -> f a -> f b
   //mbind::m a->(a->m b)-> m b
   mbind(f){return f(this.value)}//monad instance
+  mplus(_) {return this}//monadplus instance
 };
 
 const Just=o=>new TC_Just(o);
