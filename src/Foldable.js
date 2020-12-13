@@ -31,6 +31,6 @@ exports.foldl=curry((f,b,ta)=>ta.foldl(f)(b))
 
 //foldMap::Monoid m=>(a->m)->t a->m
 exports.foldMap=curry((f,ta)=>ta.foldMap(f))
-exports.foldr1=foldr1
-exports.foldl1=foldl1
+exports.foldr1=curry((f,ta)=>ta.foldr1(f))
+exports.foldl1=curry((f,ta)=>ta.foldl1(f))
 
