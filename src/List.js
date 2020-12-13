@@ -24,6 +24,11 @@ exports.listArray=o=>{
   }
   o.drop=function(n) {return peano(n)(i=>i.tail())(this)}
   o.take=function(n) {return n?cons(this.head())(this.tail().take(n-1)):[]}
+  o.elem=function(e) {return this.indexOf(e)!==-1}
+  o.unique=()=>{
+    const u=o=>oo=>oo.elem(o)?unique(oo):cons(o,unique(oo))
+    return o.length?u(head(o))(tailoo):[]
+  }
 }
 
 exports.listString=o=>{
@@ -33,7 +38,12 @@ exports.listString=o=>{
   o.init=function() {return this.substr(0,this.length-1)}
   o.drop=function(n) {return this.substr(n)}
   o.take=function(n) {return this.substr(0,n)}
-  o.pure=""
+  o.elem=function(e) {return this.indexOf(e)!==-1}
+  o.pure=o=>o.toString()
+  o.unique=()=>{
+    const u=o=>oo=>oo.elem(o)?unique(oo):cons(o,unique(oo))
+    return o.length?u(head(o))(tailoo):[]
+  }
 }
 
 exports.listString(String().__proto__)
@@ -43,7 +53,9 @@ exports.head=o=>o.head()
 exports.tail=o=>o.tail()
 exports.init=o=>o.init()
 exports.last=o=>o.last()
+exports.elem=curry((o,oo)=>oo.elem(o))
 exports.drop=curry((n,o)=>o.drop(n))
 exports.take=curry((n,o)=>o.take(n))
 exports.mconcat=o=>o.mconcat()
+exports.unique=o=>o.unique()
 
