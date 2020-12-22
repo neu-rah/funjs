@@ -24,9 +24,9 @@ const TC_Left=class Left extends T_Either {
   map(_) {return this;}//functor instance
   //mbind::m a->(a->m b)-> m b
   mbind(_){return this}//monad instance
+  app(o) {return this}// (<*>) :: f (a -> b) -> f a -> f b
   append(o){return o}//semigroup instance
   or(o){return o}//alternative instance
-  app(o) {return isRight(o)?this.value(o):o}// (<*>) :: f (a -> b) -> f a -> f b
   isLeft() {return true}
   isRight() {return false}
 };
@@ -42,10 +42,12 @@ const TC_Right=class Right extends T_Either {
   map(f) {return new Right(f(this.value));}//functor instance
   //mbind::m a->(a->m b)-> m b
   mbind(f){return f(this.value)}//monad instance
+  app(o) {return isRight(o)?o.map(this.value):o}// (<*>) :: f (a -> b) -> f a -> f b
   append(o){return isLeft(o)?o:this.pure(this.value.append(o))}//semigroup instance
   or(_){return this}//alternative instance
-  isLeft() {return true}
-  isRight() {return false}
+  isLeft() {return false}
+  isRight() {return true}
+  fromRight() {return this.value}
 };
 
 const Right=o=>new TC_Right(o);

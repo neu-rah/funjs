@@ -14,6 +14,7 @@ const TC_Nothing=class Nothing extends T_Maybe {
   append(mo) {return mo}
   when(_) {return this}//applicative instance this <* o | this << o
   then(_) {return this}//applicative instance this *> o | this >> o
+  or(o) {return o}
   app(o) {return this}// (<*>) :: f (a -> b) -> f a -> f b
   //mbind::m a->(a->m b)-> m b
   mbind(_){return this}//monad instance
@@ -30,9 +31,10 @@ const TC_Just=class Just extends T_Maybe {
   }
   map(f) {return new Just(f(this.value))}
   append(mo) {return isJust(mo)?this.pure(this.value.append(fromJust(mo))):this.empty()}
+  or(_) {return this}
   when(o) {return isNothing(o)?o:this}//applicative instance this <* o | this << o
   then(o) {return o.when(this)}//applicative instance this *> o | this >> o
-  app(o) {return this.value(o)}// (<*>) :: f (a -> b) -> f a -> f b
+  app(o) {return o.map(this.value)}// (<*>) :: f (a -> b) -> f a -> f b
   //mbind::m a->(a->m b)-> m b
   mbind(f){return f(this.value)}//monad instance
   mplus(_) {return this}//monadplus instance

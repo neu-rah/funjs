@@ -11,7 +11,7 @@ const {foldr,foldl,foldMap, foldable}=require("./Foldable")
 foldable(Array().__proto__)
 foldable(String().__proto__)
 
-const TC_Pair=class Pair {
+const PairClass=class Pair {
   constructor(a,b) {
     this.a=a
     this.b=b
@@ -23,13 +23,17 @@ const TC_Pair=class Pair {
   map(f) {return new Pair(this.fst(),f(this.snd()))}
   append(o) {return new Pair(this.fst(),this.snd().append(o))}
   swap() {return new Pair(this.snd(),this.fst())}
-  mbind(f) {return f(this)}
+  mbind(f) {return f(this)}//monad instance
+  // pure(o) {return Pair(empty,o)}//<-empty of what?
+  app(p) {//applicative instance
+    return new Pair(this.fst().append(p.fst()),this.snd()(p.snd()))
+  }
 }
 
-//pairs can construct with (a,b) or (a)(b) (curryed), courtesy of js
-const Pair=(a,b)=>typeof b==="undefined"?c=>new TC_Pair(a,c):new TC_Pair(a,b)
+const Pair=curry((a,b)=>new PairClass(a,b))
 
 exports.Pair=Pair
+exports.PairClass=PairClass
 exports.fst=o=>o.fst()
 exports.snd=o=>o.snd()
 // exports.mbind=o=>o.mbind

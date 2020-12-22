@@ -1,6 +1,6 @@
 {
   "name": "rsite-funjs",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "functional javascript",
   "main": "funjs.js",
   "scripts": {

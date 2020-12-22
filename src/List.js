@@ -31,6 +31,14 @@ exports.listArray=o=>{
     return this.length?u(this.head())(this.tail()):[]
   }
   o.isEmpty=function() {return !this.length}
+  o.partition=function(f) {
+    return this.foldr(
+      x=>o=>f(x)?
+        Pair(o.fst().append(x),o.snd()):
+        Pair(o.fst(),o.snd().append(x))
+      )(Pair([],[]))
+  }
+  o.zipWith=function(f) {return zipWith(f)(this)}
 }
 
 exports.listString=o=>{
@@ -64,4 +72,4 @@ exports.mconcat=o=>o.mconcat()
 exports.unique=o=>o.unique()
 exports.filter=curry((o,f)=>o.filter(f))
 exports.isEmpty=o=>o.isEmpty()
-
+exports.partition=o=>f=>o.partition(f)
